@@ -1,8 +1,9 @@
+import { DatePipe } from '@angular/common';
 import { Component, EventEmitter, Input, Output, booleanAttribute, numberAttribute } from '@angular/core';
 
 @Component({
   selector: 'app-product-card',
-  imports: [],
+  imports: [DatePipe],
   templateUrl: './product-card.component.html',
   styleUrl: './product-card.component.scss',
 })
@@ -19,13 +20,16 @@ export class ProductCardComponent {
   @Input()
   company!: string;
 
-  @Input({ transform: booleanAttribute })
+  @Input()
   isShow!: boolean;
   @Output()
   isShowChange = new EventEmitter<boolean>();
 
   @Input()
   photoUrl!: string;
+
+  @Input()
+  createDate!: Date;
 
   onSetDisplay(isShow: boolean): void {
     this.isShowChange.emit(isShow);

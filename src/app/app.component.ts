@@ -9,11 +9,13 @@ import { ProductCardComponent } from './product-card/product-card.component';
   styleUrl: './app.component.scss',
 })
 export class App {
-  productName = '書籍 A';
-  author = '作者甲、作者乙、作者丙';
-  company = '博碩文化';
+  protected productName = '書籍 A';
+  protected author = '作者甲、作者乙、作者丙';
+  protected company = '博碩文化';
 
-  isShow = true;
+  protected isShow = true;
 
-  photoUrl = 'https://api.fnkr.net/testimg/200x200/DDDDDD/999999/?text=img';
+  protected photoUrl = 'https://api.fnkr.net/testimg/200x200/DDDDDD/999999/?text=img';
+
+  protected createDate = new Date('2025/4/9');
 }
