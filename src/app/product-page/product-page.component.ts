@@ -58,8 +58,10 @@ export class ProductPageComponent {
     this.router.navigate(['product', 'form', product.id]);
   }
 
-  protected onRemove({ id }: Product): void {
-    this.productService.remove(id).subscribe(() => this.pageIndex.set(1));
+  onRemove({ id }: Product): void {
+    this.productService.remove(id).subscribe(() => {
+      this.productService.remove(id).subscribe(() => this.pageIndex.set(1));
+    });
   }
 
   protected onView(product: Product): void {
