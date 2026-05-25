@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Product } from '../model/product';
@@ -13,7 +13,11 @@ import { rxResource } from '@angular/core/rxjs-interop';
   templateUrl: './product-page.component.html',
   styleUrl: './product-page.component.scss',
 })
-export class ProductPageComponent {
+export class ProductPageComponent implements OnInit {
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
+
   private router = inject(Router);
 
   private readonly productService = inject(ProductService);
@@ -42,26 +46,15 @@ export class ProductPageComponent {
   });
 
   protected onAdd(): void {
-    const product = new Product({
-      name: '書籍 Z',
-      authors: ['作者甲', '作者乙', '作者丙'],
-      company: '博碩文化',
-      isShow: true,
-      photoUrl: 'https://api.fnkr.net/testimg/200x200/DDDDDD/999999/?text=img',
-      createDate: new Date('2025/4/9'),
-      price: 10000,
-    });
-    this.productService.add(product).subscribe(() => this.data.reload());
+    this.router.navigate(['product', 'new']);
   }
 
   protected onEdit(product: Product): void {
     this.router.navigate(['product', 'form', product.id]);
   }
 
-  onRemove({ id }: Product): void {
-    this.productService.remove(id).subscribe(() => {
-      this.productService.remove(id).subscribe(() => this.pageIndex.set(1));
-    });
+  protected onRemove({ id }: Product): void {
+    this.productService.remove(id).subscribe(() => this.pageIndex.set(1));
   }
 
   protected onView(product: Product): void {
